@@ -1,2 +1,5 @@
 # AnimalFarmCalculator
-Income Calculator for Evolution Farm in Discord 
+
+[App Link](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
+
+
