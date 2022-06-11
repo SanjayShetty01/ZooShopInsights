@@ -31,9 +31,9 @@ The calculator provides you with an one-stop solution to find all the important 
 
 Screenshots:
 
-![YieldCalc](https://github.com/SanjayShetty01/AnimalFarmCalculator/images/YieldCalc.png)
+![YieldCalc](https://github.com/SanjayShetty01/AnimalFarmCalculator/blob/main/images/yieldCalc.png)
 
 
-![IncomeCalc](https://github.com/SanjayShetty01/AnimalFarmCalculator/images/IncomeCalc.png)
+![IncomeCalc](https://github.com/SanjayShetty01/AnimalFarmCalculator/blob/main/images/IncomeCalc.png)
 
-![ShopA](https://github.com/SanjayShetty01/AnimalFarmCalculator/images/ShopA.png)
+![ShopA](https://github.com/SanjayShetty01/AnimalFarmCalculator/blob/main/images/ShopA.png)
