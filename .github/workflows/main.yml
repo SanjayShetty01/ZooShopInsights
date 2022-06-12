@@ -12,7 +12,6 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rsconnect", "shiny", "plotly", "readxl"))
-          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Push to shinyapps.io
         run: |
