@@ -1,0 +1,21 @@
+
+on: [push, pull_request]
+
+name: deploy-shiny
+
+jobs:
+  deploy-shiny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: r-lib/actions/setup-r@main
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rsconnect", "shiny", "plotly", "readxl"), type = "binary")
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+      - name: Push to shinyapps.io
+        run: |
+          rsconnect::setAccountInfo(name="${{secrets.SHINY_ACC_NAME}}", token="${{secrets.TOKEN}}", secret="${{secrets.SECRET}}")
+          rsconnect::deployApp(appName = 'WSBEvolutionCalc')
+        shell: Rscript {0}
