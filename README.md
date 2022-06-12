@@ -2,7 +2,9 @@
 
 [![deploy-shiny](https://github.com/SanjayShetty01/AnimalFarmCalculator/actions/workflows/main.yml/badge.svg)](https://github.com/SanjayShetty01/AnimalFarmCalculator/actions/workflows/main.yml)
 
-[AnimalFarmCalculator](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
+[WSB Server Calculator](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
+
+[Hangout Server Calculator](https://sanjayshetty01.shinyapps.io/DSHEvolutionCalc)
 
 ## About the game:
 
