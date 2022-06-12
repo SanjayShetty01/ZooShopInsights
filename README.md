@@ -29,6 +29,7 @@ The game has four important aspects, they are:
 ## About the Calculator:
 The calculator provides you with an one-stop solution to find all the important metrics required to get an insight into your farm. 
 
+
 Screenshots:
 
 ![YieldCalc](https://github.com/SanjayShetty01/AnimalFarmCalculator/blob/main/images/yieldCalc.png)
