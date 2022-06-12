@@ -1,5 +1,7 @@
 # AnimalFarmCalculator
 
+[![deploy-shiny](https://github.com/SanjayShetty01/AnimalFarmCalculator/actions/workflows/main.yml/badge.svg)](https://github.com/SanjayShetty01/AnimalFarmCalculator/actions/workflows/main.yml)
+
 [AnimalFarmCalculator](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
 
 ## About the game:
