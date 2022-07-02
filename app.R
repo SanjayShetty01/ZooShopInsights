@@ -55,6 +55,9 @@ ui <- fluidPage(
              h3(textOutput('IncomeDay')),
              h3(textOutput('IncomeMonth')),
              h3(textOutput('IncomeYear')),
+             h3(textOutput('Shopcost')),
+             h3(textOutput('YieldFarm')),
+             h3(textOutput('FarmReqDay')),
              
              br(),
              br(),
@@ -250,8 +253,190 @@ server <- function(input, output) {
     paste0("The Total Expected Income for a year is ",format(sumincome, big.mark = ',', trim = T), ' Coins')
   })
   
+# getting the cost of the entered Shop
+  output$Shopcost <- renderText({
+    
+    data$Shopcost <- c(ifelse(input$Level1 ==0, 0,((input$Level1)*300)+
+                                 data$Price_in_Stores[1]),
+                        ifelse(input$Level2 ==0,0,((input$Level2)*300)+
+                                 data$Price_in_Stores[2]),
+                        ifelse(input$Level3 ==0,0,((input$Level3)*300)+
+                                 data$Price_in_Stores[3]),
+                        ifelse(input$Level4 ==0,0,((input$Level4)*300)+
+                                 data$Price_in_Stores[4]),
+                        ifelse(input$Level5 ==0,0,((input$Level5)*300)+
+                                 data$Price_in_Stores[5]),
+                        ifelse(input$Level6 ==0,0,((input$Level6)*300)+
+                                 data$Price_in_Stores[6]),
+                        ifelse(input$Level7 ==0,0,((input$Level7)*300)+
+                                 data$Price_in_Stores[7]),
+                        ifelse(input$Level8 ==0,0,((input$Level8)*300)+
+                                 data$Price_in_Stores[8]),
+                        ifelse(input$Level9 ==0,0,((input$Level9)*300)+
+                                 data$Price_in_Stores[9]),
+                        ifelse(input$Level10 ==0,0,((input$Level10)*300)+
+                                 data$Price_in_Stores[10]),
+                        ifelse(input$Level11 ==0,0,((input$Level11)*300)+
+                                 data$Price_in_Stores[11]),
+                        ifelse(input$Level12 ==0,0,((input$Level12)*300)+
+                                 data$Price_in_Stores[12]),
+                        ifelse(input$Level13 ==0,0,((input$Level13)*300)+
+                                 data$Price_in_Stores[13]),
+                        ifelse(input$Level14 ==0,0,((input$Level14)*300)+
+                                 data$Price_in_Stores[14]),
+                        ifelse(input$Level15 ==0,0,((input$Level15)*300)+
+                                 data$Price_in_Stores[15]),
+                        ifelse(input$Level16 ==0,0,((input$Level16)*300)+
+                                 data$Price_in_Stores[16]),
+                        ifelse(input$Level17 ==0,0,((input$Level17)*300)+
+                                 data$Price_in_Stores[17]),
+                        ifelse(input$Level18 ==0,0,((input$Level18)*300)+
+                                 data$Price_in_Stores[18]),
+                        ifelse(input$Level19 ==0,0,((input$Level19)*300)+
+                                 data$Price_in_Stores[19]),
+                        ifelse(input$Level20 ==0,0,((input$Level20)*300)+
+                                 data$Price_in_Stores[20])
+    ) 
+    
+    Shopcost = round(sum(data$Shopcost),2)
+    
+    paste0("The Cost of the shop is ",format(Shopcost, big.mark = ',', trim = T), ' Coins')
+    
+  })
+ 
+  output$YieldFarm <- renderText({
+    
+    data$Shopcost <- c(ifelse(input$Level1 ==0, 0,((input$Level1)*300)+
+                                data$Price_in_Stores[1]),
+                       ifelse(input$Level2 ==0,0,((input$Level2)*300)+
+                                data$Price_in_Stores[2]),
+                       ifelse(input$Level3 ==0,0,((input$Level3)*300)+
+                                data$Price_in_Stores[3]),
+                       ifelse(input$Level4 ==0,0,((input$Level4)*300)+
+                                data$Price_in_Stores[4]),
+                       ifelse(input$Level5 ==0,0,((input$Level5)*300)+
+                                data$Price_in_Stores[5]),
+                       ifelse(input$Level6 ==0,0,((input$Level6)*300)+
+                                data$Price_in_Stores[6]),
+                       ifelse(input$Level7 ==0,0,((input$Level7)*300)+
+                                data$Price_in_Stores[7]),
+                       ifelse(input$Level8 ==0,0,((input$Level8)*300)+
+                                data$Price_in_Stores[8]),
+                       ifelse(input$Level9 ==0,0,((input$Level9)*300)+
+                                data$Price_in_Stores[9]),
+                       ifelse(input$Level10 ==0,0,((input$Level10)*300)+
+                                data$Price_in_Stores[10]),
+                       ifelse(input$Level11 ==0,0,((input$Level11)*300)+
+                                data$Price_in_Stores[11]),
+                       ifelse(input$Level12 ==0,0,((input$Level12)*300)+
+                                data$Price_in_Stores[12]),
+                       ifelse(input$Level13 ==0,0,((input$Level13)*300)+
+                                data$Price_in_Stores[13]),
+                       ifelse(input$Level14 ==0,0,((input$Level14)*300)+
+                                data$Price_in_Stores[14]),
+                       ifelse(input$Level15 ==0,0,((input$Level15)*300)+
+                                data$Price_in_Stores[15]),
+                       ifelse(input$Level16 ==0,0,((input$Level16)*300)+
+                                data$Price_in_Stores[16]),
+                       ifelse(input$Level17 ==0,0,((input$Level17)*300)+
+                                data$Price_in_Stores[17]),
+                       ifelse(input$Level18 ==0,0,((input$Level18)*300)+
+                                data$Price_in_Stores[18]),
+                       ifelse(input$Level19 ==0,0,((input$Level19)*300)+
+                                data$Price_in_Stores[19]),
+                       ifelse(input$Level20 ==0,0,((input$Level20)*300)+
+                                data$Price_in_Stores[20])
+    ) 
+    
+    Shopcost = round(sum(data$Shopcost),2)
+    
+    j = c()
+    income = c()
+    for(i in 1:20){
+      j[i] = paste0('Level',i)
+      income[i] = input[[j[i]]]*data$Expected_Income_Per_Hour[i]
+      
+    }
+    
+    income = sum(income)
+    
+    sumincome = round(income*24*365, 2)
+    
+    yield = ifelse(Shopcost == 0, 0, sumincome/Shopcost)*100
+    
+    yield = round(yield,2)
+      
+    paste0("The Yield of the farm for a year is ",format(yield, big.mark = ',', trim = T), '%')
+  }) 
   
-# Calculating the number of days required to get back the investment
+# calculating the number pf days to get back the investments in the farm
+  
+  output$FarmReqDay <- renderText({
+    
+    data$Shopcost <- c(ifelse(input$Level1 ==0, 0,((input$Level1)*300)+
+                                data$Price_in_Stores[1]),
+                       ifelse(input$Level2 ==0,0,((input$Level2)*300)+
+                                data$Price_in_Stores[2]),
+                       ifelse(input$Level3 ==0,0,((input$Level3)*300)+
+                                data$Price_in_Stores[3]),
+                       ifelse(input$Level4 ==0,0,((input$Level4)*300)+
+                                data$Price_in_Stores[4]),
+                       ifelse(input$Level5 ==0,0,((input$Level5)*300)+
+                                data$Price_in_Stores[5]),
+                       ifelse(input$Level6 ==0,0,((input$Level6)*300)+
+                                data$Price_in_Stores[6]),
+                       ifelse(input$Level7 ==0,0,((input$Level7)*300)+
+                                data$Price_in_Stores[7]),
+                       ifelse(input$Level8 ==0,0,((input$Level8)*300)+
+                                data$Price_in_Stores[8]),
+                       ifelse(input$Level9 ==0,0,((input$Level9)*300)+
+                                data$Price_in_Stores[9]),
+                       ifelse(input$Level10 ==0,0,((input$Level10)*300)+
+                                data$Price_in_Stores[10]),
+                       ifelse(input$Level11 ==0,0,((input$Level11)*300)+
+                                data$Price_in_Stores[11]),
+                       ifelse(input$Level12 ==0,0,((input$Level12)*300)+
+                                data$Price_in_Stores[12]),
+                       ifelse(input$Level13 ==0,0,((input$Level13)*300)+
+                                data$Price_in_Stores[13]),
+                       ifelse(input$Level14 ==0,0,((input$Level14)*300)+
+                                data$Price_in_Stores[14]),
+                       ifelse(input$Level15 ==0,0,((input$Level15)*300)+
+                                data$Price_in_Stores[15]),
+                       ifelse(input$Level16 ==0,0,((input$Level16)*300)+
+                                data$Price_in_Stores[16]),
+                       ifelse(input$Level17 ==0,0,((input$Level17)*300)+
+                                data$Price_in_Stores[17]),
+                       ifelse(input$Level18 ==0,0,((input$Level18)*300)+
+                                data$Price_in_Stores[18]),
+                       ifelse(input$Level19 ==0,0,((input$Level19)*300)+
+                                data$Price_in_Stores[19]),
+                       ifelse(input$Level20 ==0,0,((input$Level20)*300)+
+                                data$Price_in_Stores[20])
+    ) 
+    
+    Shopcost = round(sum(data$Shopcost),2)
+    
+    j = c()
+    income = c()
+    for(i in 1:20){
+      j[i] = paste0('Level',i)
+      income[i] = input[[j[i]]]*data$Expected_Income_Per_Hour[i]
+      
+    }
+    
+    income = sum(income)
+    
+    sumincome = round(income*24, 2)
+    
+    reqDay = ifelse(Shopcost == 0, 0, Shopcost/sumincome)
+    
+    reqDay = round(reqDay,0)
+    
+    paste0("The Number of days to get back your Investments in the farm is ",format(reqDay, big.mark = ',', trim = T), 'days')
+  })
+
+# Calculating the number of days required to get back the investment of each levels
   
   output$PlotOfDays <- renderPlotly({
 
