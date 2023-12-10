@@ -38,16 +38,17 @@ calculateIncome <- function(level, nAnimal){
 #' # calculateDailyIncome("level")
 #'
 #' @export
+
+
 calculateDailyIncome <- function(inputName){
     levels <- paste0(inputName, 1:20)
     data <- readFarmInfoData$readFarmInfoData()
-
-    totalIncome <- sapply(levels, \(x) input[[x]] *
-                       data$Expected_Income_Per_Hour[as.numeric(sub('level',
+    totalIncome <- sapply(levels, \(x) inputName[[x]] *
+                       data$Expected_Income_Per_Hour[as.numeric(sub(inputName,
                                                                   '', x))]) |>
       sum() |>
       (\(x) x * 24)()
       round(2)
-
     return(totalIncome)
 }
+
