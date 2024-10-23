@@ -3,7 +3,7 @@ sidebarMenu <- bs4Dash::sidebarMenu(
   id = "sidebar-tabs",
   bs4Dash::menuItem(text = "Profitablity Overveiw",
                            tabName = "profitablity_overveiw",
-                           icon = shiny::icon("overview")),
+                           icon = shiny::icon("eye")),
   bs4Dash::menuItem(text = "Portfolio Setup",
                            tabName = "portfolio_setup",
                            icon = shiny::icon("table")),
