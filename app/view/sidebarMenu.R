@@ -1,0 +1,14 @@
+#' @export
+sidebarMenu <- bs4Dash::sidebarMenu(
+  id = "sidebar-tabs",
+  bs4Dash::menuItem(text = "Profitablity Overveiw",
+                           tabName = "profitablity_overveiw",
+                           icon = shiny::icon("overview")),
+  bs4Dash::menuItem(text = "Portfolio Setup",
+                           tabName = "portfolio_setup",
+                           icon = shiny::icon("table")),
+  bs4Dash::menuItem(text = "Portfolio Dashboard",
+                           tabName = "dashboard",
+                           icon = shiny::icon("chart-simple"))
+)
+

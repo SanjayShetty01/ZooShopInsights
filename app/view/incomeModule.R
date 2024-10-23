@@ -4,6 +4,7 @@ box::use(../../app/logic/calculateCost)
 box::use(../../app/logic/calculateYield)
 box::use(../../app/logic/investmentRecoveryTime)
 box::use(../../app/logic/readFarmInfoData)
+box::use(./components/sliderInputs)
 
 generateSliderInputs <- function(ns, prefix, numLevels, min, max, value) {
   lapply(1:numLevels, function(level) {

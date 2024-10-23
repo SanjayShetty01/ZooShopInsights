@@ -1,29 +1,28 @@
-box::use(shiny, plotly)
+box::use(shiny, plotly, bs4Dash)
 box::use(
   ./view/incomeModule,
   ./view/shopAnalysisModule,
   ./view/yieldModule,
+  ./view/sidebarMenu,
+  ./view/dashboardBody,
+  ./view/dashBrand
 )
-
 
 #' @export
 ui <- function(id) {
   ns <- shiny::NS(id)
-  shiny::fluidPage(
-    shiny::tabsetPanel(shiny::tabPanel("Yield Calculator",
-                                       shiny::br(),
-                                       shiny::br(),
-                       yieldModule$yieldTabUI(ns('tab1'))),
+  header <- bs4Dash::dashboardHeader(title = dashBrand$title)
+  sidebar <- bs4Dash::dashboardSidebar(sidebarMenu$sidebarMenu,
+                                       minified = F)
 
-                       shiny::tabPanel("Income Calculator",
-                                       shiny::br(),
-                                       shiny::br(),
-                                       incomeModule$incomeTabUI(ns("tab2"))),
-                       shiny::tabPanel("Shop Analysis",
-                                       shiny::br(),
-                                       shiny::br(),
-                       shopAnalysisModule$shopAnalysisUI(ns("tab3")))
-                       ),
+  body <- bs4Dash::dashboardBody(dashboardBody$mainBody(ns))
+
+  bs4Dash::dashboardPage(
+    header = header,
+    sidebar = sidebar,
+    body = body,
+    fullscreen = T,
+    help = NULL
   )
 }
 
