@@ -6,19 +6,14 @@ box::use(../../app/logic/investmentRecoveryTime)
 box::use(../../app/logic/readFarmInfoData)
 box::use(./components/sliderInputs)
 
-generateSliderInputs <- function(ns, prefix, numLevels, min, max, value) {
-  lapply(1:numLevels, function(level) {
-    shiny::sliderInput(ns(paste0(prefix, level)),
-                paste('Enter the number of the Animal in Level', level),
-                min = min, max = max, value = value)
-  })
-}
-
 #' @export
 incomeTabUI <- function(id){
   ns <- shiny::NS(id)
+  sliderInputsUI <- sliderInputs$generateSliderInputs(
+    ns, "tab2-level", 20, 0 ,6, 0)
 
-    sliderInputs <- generateSliderInputs(ns, "tab2-level", 20, 0 ,6, 0)
+  shiny::fluidPage(
+
   shiny::flowLayout(
     shiny::h3(shiny::textOutput(ns('IncomeDay'))),
     shiny::h3(shiny::textOutput(ns('IncomeMonth'))),
@@ -26,16 +21,22 @@ incomeTabUI <- function(id){
     shiny::h3(shiny::textOutput(ns('Shopcost'))),
     shiny::h3(shiny::textOutput(ns('YieldFarm'))),
     shiny::h3(shiny::textOutput(ns('FarmReqDay'))),
+),
+    shiny::br(),
+    shiny::br(),
 
-    shiny::br(),
-    shiny::br(),
-    do.call(shiny::tagList, sliderInputs))
+    shiny::fluidRow(class = "slider-row",
+      do.call(shiny::tagList, sliderInputsUI),
+      style = " justify-content: space-between;")
+)
+
 }
 
 
 #' @export
 incomeTabServer <- function(id){
   shiny::moduleServer(id, function(input, output, server){
+
 
     output$IncomeDay <- shiny::renderText({
       #totalDailyIncome <- calculateIncome$calculateDailyIncome("tab2-level")
