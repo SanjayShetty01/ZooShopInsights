@@ -9,57 +9,106 @@ box::use(../../app/logic/calculateCost)
 yieldTabUI <- function(id){
   ns <- shiny::NS(id)
 
-  shiny::sidebarLayout(
-    shiny::sidebarPanel(
+  shiny::fluidPage(
+    bs4Dash::box(title = "User Input",
+                 status = "primary",
+                 icon = shiny::icon("pencil"),
+                 width = 12,
       shiny::fixedRow(
-        shiny::selectInput(ns('storeType'), 'Store or Daily Store?',
-                    c("Evo Store" = 'Price_in_Stores',
-                      'Daily Shop' = 'DailyPrice'))),
-      shiny::fixedRow(
-        shiny::numericInput(ns('Nbought'), "Enter the number of animals already
-                            bought in the shop", 0),
-        style = "margin-bottom:-15px;"),
-      shiny::tags$small(shiny::em('*Only applicable for Evolution Store')),
-      shiny::br(),
-      shiny::br(),
-      shiny::fixedRow(
-        shiny::sliderInput(ns('Nanimal'), 'Number of Animals', min = 1, max = 10, value = 1),
-        shiny::sliderInput(ns('Level'), 'Enter the Level of the Animal', min = 1, max = 20, value = 2)),
+        shiny::column(width = 5,
+                      shiny::selectInput(ns('storeType'), 'Store or Daily Store?',
+                                         c("Evo Store" = 'Price_in_Stores',
+                                           'Daily Shop' = 'DailyPrice'))
+        ),
+        shiny::column(offset = 2, width = 5,
+                      shiny::numericInput(ns('Nbought'), "Enter the number of animals already
+                            bought in the shop", 0)
+                      ),
+        shiny::column(offset = 7, width = 5,
+                      shiny::tags$small(shiny::em('*Only applicable for Evolution Store')))
+        ),
+
+          shiny::br(),
+          shiny::br(),
+          shiny::fixedRow(
+            shiny::column(width = 5,
+                          shiny::sliderInput(ns('Nanimal'),
+                                             'Number of Animals',
+                                             min = 1, max = 10, value = 1)),
+
+            shiny::column(width = 5, offset = 2,
+                          shiny::sliderInput(ns('Level'),
+                                             'Enter the Level of the Animal',
+                                             min = 1, max = 20, value = 2)
+                   )
+            )
     ),
-    shiny::mainPanel(
-      shiny::h3(shiny::textOutput(ns('cost'))),
-      shiny::h3(shiny::textOutput(ns('yield'))),
-      shiny::h3(shiny::textOutput(ns('reqDays')))))
+
+    bs4Dash::box(
+      title = "Summary",
+      status = "primary",
+      icon = shiny::icon("animal"),
+      width = 12,
+
+      shiny::fluidRow(
+        bs4Dash::bs4InfoBoxOutput(ns("costBox")),
+        bs4Dash::bs4InfoBoxOutput(ns("yieldBox")),
+        bs4Dash::bs4InfoBoxOutput(ns("reqDaysBox"))
+      )
+    )
+
+  )
 }
 
 #' @export
 yieldTabServer <- function(id){
   shiny::moduleServer(id, function(input, output, server){
-    output$cost <- shiny::renderText({
+
+    output$costBox <- bs4Dash::renderbs4InfoBox({
       cost <- calculateCost$calculateCost(level = input$Level,
                                           nAnimal = input$Nanimal,
                                           store_type = input$storeType,
                                           nAnimalBought = input$Nbought)
 
-      paste0("The Price of animals of would be ",
-             format(cost, big.mark = ',', trim = T))
+      bs4Dash::infoBox(
+        title = "Cost",
+        value = cost,
+        icon = shiny::icon("money-bill"),
+        color = "success",
+        fill = TRUE,
+        width = 4
+      )
     })
 
-    output$yield <- shiny::renderText({
+
+    output$yieldBox <- bs4Dash::renderbs4InfoBox({
       yield <- calculateYield$calculateYield(level = input$Level,
                                              nAnimal = input$Nanimal,
                                              store_type = input$storeType,
                                              nAnimalBought = input$Nbought)
-
-      paste0("The Yield of the animal for a year is ", yield, '%')
+      bs4Dash::infoBox(
+        title = "Yield",
+        value = yield,
+        icon = shiny::icon("percent"),
+        color = "orange",
+        fill = TRUE,
+        width = 4
+      )
     })
 
-    output$reqDays <- shiny::renderText({
+    output$reqDaysBox <- bs4Dash::renderbs4InfoBox({
       reqDays <- investmentRecoveryTime$investmentRecoveryTime(
         level = input$Level, nAnimal = input$Nanimal,
         store_type = input$storeType, nAnimalBought = input$Nbought)
 
-      paste0("Days required to get back the investment ", reqDays, ' Days')
+      bs4Dash::infoBox(
+        title = "Days Required to recover",
+        value = reqDays,
+        icon = shiny::icon("calendar"),
+        color = "teal",
+        fill = TRUE,
+        width = 4
+      )
     })
   })
 }
