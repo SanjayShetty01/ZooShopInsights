@@ -1,4 +1,6 @@
 box::use(shiny)
+box::use(shinyWidgets)
+box::use(htmltools)
 box::use(../../app/logic/calculateIncome)
 box::use(../../app/logic/calculateCost)
 box::use(../../app/logic/calculateYield)
@@ -14,22 +16,30 @@ incomeTabUI <- function(id){
 
   shiny::fluidPage(
 
-  shiny::flowLayout(
-    shiny::h3(shiny::textOutput(ns('IncomeDay'))),
-    shiny::h3(shiny::textOutput(ns('IncomeMonth'))),
-    shiny::h3(shiny::textOutput(ns('IncomeYear'))),
-    shiny::h3(shiny::textOutput(ns('Shopcost'))),
-    shiny::h3(shiny::textOutput(ns('YieldFarm'))),
-    shiny::h3(shiny::textOutput(ns('FarmReqDay'))),
-),
-    shiny::br(),
-    shiny::br(),
+    bs4Dash::box(
+      title = "Enter Portfolio Details",
+      status = "primary",
+      icon = shiny::icon("pencil"),
+      width = 12,
 
-    shiny::fluidRow(class = "slider-row",
-      do.call(shiny::tagList, sliderInputsUI),
-      style = " justify-content: space-between;")
+      shiny::fluidRow(class = "slider-row",
+                      do.call(shiny::tagList, sliderInputsUI),
+                      style = "justify-content: space-between;")
+    ),
+
+    shiny::fixedRow(
+      shiny::column(
+      width = 6,
+      offset = 3,
+      shinyWidgets::actionBttn(
+        inputId = "submit-portfolio1",
+        label = "Calculate Results",
+        style = "material-flat",
+        color = "primary"
+      ) |>
+        htmltools::tagAppendAttributes(style = "width: inherit;")
+    ))
 )
-
 }
 
 
