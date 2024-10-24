@@ -69,7 +69,7 @@ yieldTabUI <- function(id){
     bs4Dash::box(
       title = "Summary",
       status = "primary",
-      icon = shiny::icon("animal"),
+      icon = shiny::icon("cow"),
       width = 12,
 
       shiny::fluidRow(
@@ -93,7 +93,7 @@ yieldTabServer <- function(id){
                                           nAnimalBought = input$Nbought)
 
       bs4Dash::valueBox(
-        subtitle = shiny::strong("Cost"),
+        subtitle = shiny::em(shiny::strong("Cost")),
         value = shiny::h2(cost),
         icon = shiny::icon("money-bill"),
         color = "success",
@@ -108,7 +108,7 @@ yieldTabServer <- function(id){
                                              store_type = input$storeType,
                                              nAnimalBought = input$Nbought)
       bs4Dash::valueBox(
-        subtitle = shiny::strong("Yield"),
+        subtitle = shiny::em(shiny::strong("Yield")),
         value = shiny::h2(paste0(yield, "%")),
         icon = shiny::icon("percent"),
         color = "orange",
@@ -122,7 +122,7 @@ yieldTabServer <- function(id){
         store_type = input$storeType, nAnimalBought = input$Nbought)
 
       bs4Dash::valueBox(
-        subtitle = shiny::strong("Days Required to recover"),
+        subtitle = shiny::em(shiny::strong("Days Required to recover")),
         value = shiny::h2(reqDays),
         icon = shiny::icon("calendar"),
         color = "teal",
