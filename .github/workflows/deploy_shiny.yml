@@ -45,6 +45,7 @@ jobs:
         run: rhino::test_r()
    
       - name: Push to shinyapps.io
+        if: github.event_name == 'push'
         run: |
           rsconnect::setAccountInfo(name="${{secrets.SHINY_ACC_NAME}}", token="${{secrets.TOKEN}}", secret="${{secrets.SECRET}}")
           rsconnect::deployApp(appName = 'WSBEvolutionCalc')
