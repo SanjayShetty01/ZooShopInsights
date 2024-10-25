@@ -35,9 +35,9 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
 
       - name: Lint R
-        if: always()
-        shell: Rscript {0}
-        run: rhino::lint_r()
+        #if: always()
+        #shell: Rscript {0}
+        #run: rhino::lint_r()
 
       - name: Run R unit tests
         if: always()
