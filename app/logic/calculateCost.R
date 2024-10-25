@@ -34,10 +34,12 @@ calculateCost <- function(level, nAnimal, store_type = "DailyPrice",
   return(prices)
 }
 
-calculateShopCostPerLevel <- function(level, price){
-  shopCost <- ifelse(levels == 0, 0, (levels * 300) + prices) |>
-    sum() |>
-    round(2)
+#' @export
+calculateShopCostPerLevel <- function(nAnimals){
+  price <- readFarmInfoData$readFarmInfoData() |>
+    (\(x) x$Price_in_Stores)()
+
+  shopCost <- ifelse(nAnimals == 0, 0, (nAnimals * 300) + price)
 
   return(shopCost)
 }
@@ -56,12 +58,11 @@ calculateShopCostPerLevel <- function(level, price){
 #' # calculateTotalShopCost("level")
 #'
 #' @export
-calculateTotalShopCost <- function(inputName){
-  levels <- sapply(1:20, \(i) input[[paste0(inputName, i)]])
-  prices <- readFarmInfoData$readFarmInfoData() |>
-    (\(x) x$Price_in_Stores)()
+calculateTotalShopCost <- function(nAnimals){
 
-  shopTotalCost <- calculateShopCostPerLevel(level = levels, price = prices)
+  shopTotalCost <- calculateShopCostPerLevel(nAnimals = nAnimals) |>
+    sum() |>
+    round(2)
 
   return(shopTotalCost)
 }
