@@ -46,7 +46,9 @@ shopAnalysisUI <- function(id){
       icon = shiny::icon("chart"),
       width = 12,
 
-      highcharter::highchartOutput(ns("reqDayPlot"))
+      highcharter::highchartOutput(ns("reqDayPlot")),
+      highcharter::highchartOutput(ns("incomePlot")),
+      highcharter::highchartOutput(ns("costPlot"))
 
   )
   )
@@ -63,7 +65,27 @@ shopAnalysisUI <- function(id){
 shopAnalysisServer <- function(id, data) {
   shiny::moduleServer(id, function(input, output, session) {
 
+
+    labelData <- shiny::reactive({
+      shiny::req(data())
+
+      labelData <- data()
+
+
+      labelData$income <-  calculateIncome$calculateIncome(
+        labelData$Level, labelData$NofAnimals)
+
+      labelData$cost <- calculateCost$calculateShopCostPerLevel(
+        labelData$NofAnimals)
+
+      labelData$reqDays <- labelData$cost/ (labelData$income * 24)
+
+      labelData
+
+    })
+
     output$dailyIncome <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       income <- calculateIncome$calculateDailyIncome(
@@ -83,6 +105,7 @@ shopAnalysisServer <- function(id, data) {
     })
 
     output$monthlyIncome <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       income <- calculateIncome$calculateMonthlyIncome(
@@ -102,6 +125,7 @@ shopAnalysisServer <- function(id, data) {
     })
 
     output$yealyIncome <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       income <- calculateIncome$calculateYearlyIncome(
@@ -122,6 +146,7 @@ shopAnalysisServer <- function(id, data) {
 
 
     output$shopCost <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       shopCost <- calculateCost$calculateTotalShopCost(
@@ -141,6 +166,7 @@ shopAnalysisServer <- function(id, data) {
 
 
     output$farmYield <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       totalYield <- calculateYield$calculateTotalYield(levelData$Level,
@@ -159,6 +185,7 @@ shopAnalysisServer <- function(id, data) {
 
 
     output$reqDays <- bs4Dash::renderbs4InfoBox({
+      shiny::req(data())
       levelData <- data()
 
       FarmReqDay <-   investmentRecoveryTime$investmentRecoveryTimeFarm(
@@ -177,18 +204,48 @@ shopAnalysisServer <- function(id, data) {
     })
 
     output$reqDayPlot <- highcharter::renderHighchart({
-      labelData <- data()
+      shiny::req(labelData())
 
-      investmentRecoveryTime$investmentRecoveryTime()
+      labelData_non_reactive <- labelData()
 
-      highcharter::hchart(data(),
+      highcharter::hchart(labelData_non_reactive,
                           "column",
-                          highcharter::hcaes(x = Level, y = NofAnimals),
+                          highcharter::hcaes(x = Level, y = reqDays),
                           color = "#0198f9",
                           name = "Days Required to Recover the Investment for each Level") |>
-        highcharter::hc_title(text = "Median life expectancy by year", align = "left") |>
+        highcharter::hc_title(text = "Required Days", align = "left") |>
         highcharter::hc_xAxis(title = list(text = "Level")) |>
         highcharter::hc_yAxis(title = list(text = "Required Days to Recover the Investment"))
+
+    })
+
+    output$incomePlot <- highcharter::renderHighchart({
+      shiny::req(labelData())
+      labelData_non_reactive <- labelData()
+
+      highcharter::hchart(labelData_non_reactive,
+                          "column",
+                          highcharter::hcaes(x = Level, y = income),
+                          color = "#0198f9",
+                          name = "Income from Animals for each Level") |>
+        highcharter::hc_title(text = "Income", align = "left") |>
+        highcharter::hc_xAxis(title = list(text = "Level")) |>
+        highcharter::hc_yAxis(title = list(text = "Income/ Hour"))
+
+    })
+
+    output$costPlot <- highcharter::renderHighchart({
+      shiny::req(labelData())
+      labelData_non_reactive <- labelData()
+
+      highcharter::hchart(labelData_non_reactive,
+                          "column",
+                          highcharter::hcaes(x = Level, y = cost),
+                          color = "#0198f9",
+                          name = "Cost of Animals for each Level") |>
+        highcharter::hc_title(text = "Cost of Animal per Level", align = "left") |>
+        highcharter::hc_xAxis(title = list(text = "Level")) |>
+        highcharter::hc_yAxis(title = list(text = "Cost of Animal"))
 
     })
 
