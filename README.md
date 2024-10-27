@@ -1,5 +1,7 @@
 ## About the game:
 
+[AnimalFarmCalculator](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
+
 Evolution is an animal farm simulator game for discord servers. 
 
 The farm allows you to choose animal kind, the selection of animal kind is just cosmetic rather than being functional (i.e. the payout & the cost of the animal are the same irrespective of the type of animal you select). You can buy an animal from the stores and upgrade them to the next level to get more coins. 
