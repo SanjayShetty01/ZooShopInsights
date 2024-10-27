@@ -1,6 +1,6 @@
 ## About the game:
 
-[AnimalFarmCalculator](https://sanjayshetty01.shinyapps.io/WSBEvolutionCalc)
+[ZooShop Insights App](https://sanjayshetty01.shinyapps.io/ZooShopInsights)
 
 Evolution is an animal farm simulator game for discord servers. 
 
