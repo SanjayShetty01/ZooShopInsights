@@ -6,8 +6,13 @@ box::use(./components/sliderInputs)
 #' @export
 incomeTabUI <- function(id){
   ns <- shiny::NS(id)
-  sliderInputsUI <- sliderInputs$generateSliderInputs(
-    ns, "tab2-level", 20, 0 ,6, 0)
+
+  sliderInputsUI <-  sliderInputs$generateSliderInputs(ns, "tab2-level" ,
+                                                       1, 20,
+                                                       c(30, 25, 25, 25, 25, 25,
+                                                         20, 20, 20, 15, 15, 15,
+                                                         15, 15, 15, 10, 10, 10,
+                                                         10, 10))
 
   shiny::fluidPage(
 
