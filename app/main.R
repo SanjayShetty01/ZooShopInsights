@@ -32,9 +32,7 @@ server <- function(id) {
 
     overviewModule$yieldTabServer("tab1")
 
-    levelData <- setupModule$incomeTabServer("tab2")
-
-    dashboardBody$mainBodyServer("submit_portfolio")
+    levelData <- setupModule$incomeTabServer("tab2", parent = session)
 
     dashboardModule$shopAnalysisServer("tab3", data = levelData)
   })

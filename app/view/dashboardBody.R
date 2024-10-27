@@ -15,21 +15,7 @@ mainBody <- function(ns) {
       "portfolio_setup",
       shiny::br(),
       shiny::br(),
-      setupModule$incomeTabUI(ns("tab2")),
-
-      shiny::fixedRow(
-        shiny::column(
-          width = 6,
-          offset = 3,
-          shinyWidgets::actionBttn(
-            inputId = "submit_portfolio",
-            label = "Calculate Results",
-            style = "material-flat",
-            color = "primary"
-          ) |>
-            htmltools::tagAppendAttributes(style = "width: inherit;")
-        ))
-
+      setupModule$incomeTabUI(ns("tab2"))
     ),
 
     bs4Dash::tabItem(
@@ -39,14 +25,4 @@ mainBody <- function(ns) {
       dashboardModule$shopAnalysisUI(ns("tab3"))
     )
   )
-}
-
-#' @export
-mainBodyServer <- function(id) {
-  shiny::moduleServer(id,  function(input, output, server){
-    shiny::observeEvent(input$submit_portfolio, {
-      bs4Dash::updateTabItems(session = server, inputId = "sidebar-tabs",
-                               selected = "dashboard")
-    })
-  })
 }
