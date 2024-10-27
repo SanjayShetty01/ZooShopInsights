@@ -27,28 +27,29 @@ incomeTabUI <- function(id){
                       style = "justify-content: space-between;")
     ),
 
-    # shiny::fixedRow(
-    #   shiny::column(
-    #   width = 6,
-    #   offset = 3,
-    #   shinyWidgets::actionBttn(
-    #     inputId = "submit_portfolio",
-    #     label = "Calculate Results",
-    #     style = "material-flat",
-    #     color = "primary"
-    #   ) |>
-    #     htmltools::tagAppendAttributes(style = "width: inherit;")
-    # ))
+    shiny::fixedRow(
+      shiny::column(
+      width = 6,
+      offset = 3,
+      shinyWidgets::actionBttn(
+        inputId = ns("submit_portfolio"),
+        label = "Calculate Results",
+        style = "material-flat",
+        color = "primary"
+      ) |>
+        htmltools::tagAppendAttributes(style = "width: inherit;")
+    ))
 )
 }
 
 
 #' @export
-incomeTabServer <- function(id){
+incomeTabServer <- function(id, parent){
   shiny::moduleServer(id, function(input, output, server){
     shiny::observeEvent(input$submit_portfolio, {
-      shiny::updateTabsetPanel(inputId = "sidebar-tabs",
-                               selected = "dashboard")
+      shiny::updateTabsetPanel(session = parent,
+        inputId = "sidebar-tabs",
+        selected = "dashboard")
     })
 
     return(
