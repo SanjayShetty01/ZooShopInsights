@@ -43,12 +43,12 @@ shopAnalysisUI <- function(id){
     bs4Dash::box(
       title = "Graphs",
       status = "primary",
-      icon = shiny::icon("chart"),
+      icon = shiny::icon("chart-simple"),
       width = 12,
 
-      highcharter::highchartOutput(ns("reqDayPlot")),
       highcharter::highchartOutput(ns("incomePlot")),
-      highcharter::highchartOutput(ns("costPlot"))
+      highcharter::highchartOutput(ns("costPlot")),
+      highcharter::highchartOutput(ns("reqDayPlot"))
 
   )
   )
@@ -96,7 +96,7 @@ shopAnalysisServer <- function(id, data) {
 
       bs4Dash::valueBox(
         subtitle = shiny::em(shiny::strong("Daily Income")),
-        value = shiny::h2(income),
+        value = shiny::h2(scales::dollar(income)),
         icon = shiny::icon("money-bill"),
         color = "success",
         width = 4
@@ -116,7 +116,7 @@ shopAnalysisServer <- function(id, data) {
 
       bs4Dash::valueBox(
         subtitle = shiny::em(shiny::strong("Monthly Income")),
-        value = shiny::h2(income),
+        value = shiny::h2(scales::dollar(income)),
         icon = shiny::icon("money-bill"),
         color = "success",
         width = 4
@@ -136,7 +136,7 @@ shopAnalysisServer <- function(id, data) {
 
       bs4Dash::valueBox(
         subtitle = shiny::em(shiny::strong("Yearly Income")),
-        value = shiny::h2(income),
+        value = shiny::h2(scales::dollar(income)),
         icon = shiny::icon("money-bill"),
         color = "success",
         width = 4
@@ -156,9 +156,9 @@ shopAnalysisServer <- function(id, data) {
 
       bs4Dash::valueBox(
         subtitle = shiny::em(shiny::strong("Shop Cost")),
-        value = shiny::h2(shopCost),
+        value = shiny::h2(scales::dollar(shopCost)),
         icon = shiny::icon("money-bill"),
-        color = "success",
+        color = "danger",
         width = 4
       )
 
@@ -176,8 +176,8 @@ shopAnalysisServer <- function(id, data) {
       bs4Dash::valueBox(
         subtitle = shiny::em(shiny::strong("Farm Yield")),
         value = shiny::h2(totalYield),
-        icon = shiny::icon("money-bill"),
-        color = "success",
+        icon = shiny::icon("percent"),
+        color = "olive",
         width = 4
       )
 
@@ -194,10 +194,10 @@ shopAnalysisServer <- function(id, data) {
 
 
       bs4Dash::valueBox(
-        subtitle = shiny::em(shiny::strong("plceholder")),
+        subtitle = shiny::em(shiny::strong("Days Required to Recover")),
         value = shiny::h2(FarmReqDay),
-        icon = shiny::icon("money-bill"),
-        color = "success",
+        icon = shiny::icon("calendar-check"),
+        color = "teal",
         width = 4
       )
 
@@ -211,11 +211,11 @@ shopAnalysisServer <- function(id, data) {
       highcharter::hchart(labelData_non_reactive,
                           "column",
                           highcharter::hcaes(x = Level, y = reqDays),
-                          color = "#0198f9",
+                          color = "#20c997",
                           name = "Days Required to Recover the Investment for each Level") |>
-        highcharter::hc_title(text = "Required Days", align = "left") |>
+        highcharter::hc_title(text = "Days to Investment Recovery per Level") |>
         highcharter::hc_xAxis(title = list(text = "Level")) |>
-        highcharter::hc_yAxis(title = list(text = "Required Days to Recover the Investment"))
+        highcharter::hc_yAxis(title = list(text = "Days"))
 
     })
 
@@ -226,11 +226,11 @@ shopAnalysisServer <- function(id, data) {
       highcharter::hchart(labelData_non_reactive,
                           "column",
                           highcharter::hcaes(x = Level, y = income),
-                          color = "#0198f9",
+                          color = "#28a745",
                           name = "Income from Animals for each Level") |>
-        highcharter::hc_title(text = "Income", align = "left") |>
+        highcharter::hc_title(text = "Cost per Animal Level") |>
         highcharter::hc_xAxis(title = list(text = "Level")) |>
-        highcharter::hc_yAxis(title = list(text = "Income/ Hour"))
+        highcharter::hc_yAxis(title = list(text = "Income (Hour)"))
 
     })
 
@@ -241,9 +241,9 @@ shopAnalysisServer <- function(id, data) {
       highcharter::hchart(labelData_non_reactive,
                           "column",
                           highcharter::hcaes(x = Level, y = cost),
-                          color = "#0198f9",
+                          color = "#dc3545",
                           name = "Cost of Animals for each Level") |>
-        highcharter::hc_title(text = "Cost of Animal per Level", align = "left") |>
+        highcharter::hc_title(text = "Cost per Animal Level") |>
         highcharter::hc_xAxis(title = list(text = "Level")) |>
         highcharter::hc_yAxis(title = list(text = "Cost of Animal"))
 
