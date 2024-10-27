@@ -5,19 +5,6 @@ box::use(../../app/logic/calculateYield)
 box::use(../../app/logic/investmentRecoveryTime)
 box::use(../../app/logic/readFarmInfoData)
 
-# getAnimalShopSliderInputs <- function(start, end, max_value, ns) {
-#   lapply(start:end, function(i) {
-#     shiny::sliderInput(
-#       ns(paste0('shop', i)),
-#       paste('Enter the number of the Animal you have bought in Level', i),
-#       min = 0,
-#       max = max_value[i],
-#       value = 0
-#     )
-#   })
-# }
-
-
 shopAnalysisUI <- function(id){
   ns <- shiny::NS(id)
   shiny::fluidPage(
