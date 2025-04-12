@@ -1,3 +1,5 @@
+[![deploy-shiny](https://github.com/SanjayShetty01/ZooShopInsights/actions/workflows/deploy_shiny.yml/badge.svg)](https://github.com/SanjayShetty01/ZooShopInsights/actions/workflows/deploy_shiny.yml)
+
 ## About the game:
 
 [ZooShop Insights App](https://sanjayshetty01.shinyapps.io/ZooShopInsights)
