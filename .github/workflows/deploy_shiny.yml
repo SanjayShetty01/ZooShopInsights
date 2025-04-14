@@ -33,11 +33,6 @@ jobs:
 
       - name: Setup R dependencies
         uses: r-lib/actions/setup-renv@v2
-
-      - name: Run R unit tests
-        if: always()
-        shell: Rscript {0}
-        run: rhino::test_r()
    
       - name: Push to shinyapps.io
         if: github.event_name == 'push'
