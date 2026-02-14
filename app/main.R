@@ -1,3 +1,5 @@
+options(rsconnect.max.bundle.files = 15000)
+
 box::use(shiny, plotly, bs4Dash)
 box::use(
   ./view/setupModule,
