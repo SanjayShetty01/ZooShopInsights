@@ -18,7 +18,7 @@ incomeTabUI <- function(id){
 
     bs4Dash::box(
       title = "Enter Portfolio Details",
-      status = "primary",
+      status = "orange",
       icon = shiny::icon("pencil"),
       width = 12,
 
@@ -38,7 +38,7 @@ incomeTabUI <- function(id){
         color = "primary"
       ) |>
         htmltools::tagAppendAttributes(style = "width: inherit;")
-    ))
+      ))
 )
 }
 
