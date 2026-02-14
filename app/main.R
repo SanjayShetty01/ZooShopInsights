@@ -22,7 +22,7 @@ ui <- function(id) {
     sidebar = sidebar,
     body = body,
     fullscreen = T,
-    help = NULL
+    help = NULL,
   )
 }
 

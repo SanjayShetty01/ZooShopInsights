@@ -6,7 +6,7 @@ generateSliderInputs <- function(ns, prefix, start, end, max_value) {
       min = 0,
       max = max_value[level],
       value = 0,
-      width = "250px"
+      width = "250px",
     )
   })
 }

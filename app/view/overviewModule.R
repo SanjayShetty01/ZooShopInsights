@@ -12,7 +12,7 @@ yieldTabUI <- function(id){
   shiny::fluidPage(
     bs4Dash::box(
       title = "User Input",
-      status = "primary",
+      status = "orange",
       icon = shiny::icon("pencil"),
       width = 12,
       shiny::fixedRow(
@@ -68,7 +68,7 @@ yieldTabUI <- function(id){
 
     bs4Dash::box(
       title = "Summary",
-      status = "primary",
+      status = "orange",
       icon = shiny::icon("cow"),
       width = 12,
 

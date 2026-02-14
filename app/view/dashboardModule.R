@@ -10,7 +10,7 @@ shopAnalysisUI <- function(id){
   shiny::fluidPage(
     bs4Dash::box(
       title = "Portfolio Summary",
-      status = "primary",
+      status = "orange",
       icon = shiny::icon("box"),
       width = 12,
 
@@ -29,7 +29,7 @@ shopAnalysisUI <- function(id){
 
     bs4Dash::box(
       title = "Graphs",
-      status = "primary",
+      status = "orange",
       icon = shiny::icon("chart-simple"),
       width = 12,
 
