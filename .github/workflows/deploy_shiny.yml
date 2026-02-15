@@ -60,5 +60,5 @@ jobs:
         run: |
           install.packages("rsconnect", repos="http://cran.us.r-project.org")
           rsconnect::setAccountInfo(name="${{secrets.SHINY_ACC_NAME}}", token="${{secrets.TOKEN}}", secret="${{secrets.SECRET}}")
-          rsconnect::deployApp(appName = 'ZooShopInsights', forceUpdate = TRUE)
+          rsconnect::deployApp(appName = 'Specie', forceUpdate = TRUE)
         shell: Rscript {0}
