@@ -3,9 +3,9 @@
 
 # <img src="app/static/logo.svg" width="27" height="27"> Specie
 
-## About the game:
+### Live Application Link: [Specie](https://sanjayshetty01.shinyapps.io/Specie)
 
-[Specie](https://sanjayshetty01.shinyapps.io/Specie)
+## About the game:
 
 Evolution is an animal farm simulator game for discord servers.
 
