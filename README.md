@@ -1,5 +1,8 @@
 [![deploy-shiny](https://github.com/SanjayShetty01/Specie/actions/workflows/deploy_shiny.yml/badge.svg)](https://github.com/SanjayShetty01/ZooShopInsights/actions/workflows/deploy_shiny.yml)
 
+
+# <img src="app/static/logo.svg" width="27" height="27"> Specie
+
 ## About the game:
 
 [Specie](https://sanjayshetty01.shinyapps.io/Specie)
